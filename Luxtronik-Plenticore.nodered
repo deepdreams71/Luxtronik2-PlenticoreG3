@@ -1,0 +1,2224 @@
+[
+    {
+        "id": "fcd1fad6.c6a83",
+        "type": "tab",
+        "label": "Luxtronik2 LWDV90",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e6f9c626f73bcd11",
+        "type": "inject",
+        "z": "fcd1fad6.c6a83",
+        "name": "Ausleseintervalls",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "120",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 590,
+        "y": 1280,
+        "wires": [
+            [
+                "329206188b4c2a44",
+                "38834e66f42b542d",
+                "292c91ace8137905",
+                "b4249957b7bb595f",
+                "e9decaac6b1731aa",
+                "a35754bb38c52037",
+                "ce1c1f978cf9cb01",
+                "1af1ef89f4a7625e",
+                "de228a8683666a5b",
+                "45454342ef64b1b8"
+            ]
+        ]
+    },
+    {
+        "id": "a57b6495a5d1fd7e",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_supply",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_supply\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1560,
+        "wires": [
+            [
+                "4fba88cfcaf2a744"
+            ]
+        ]
+    },
+    {
+        "id": "4fba88cfcaf2a744",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Vorlauf",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2230,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "9d18d7b1b3d18faa",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_return",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_return\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1850,
+        "y": 1620,
+        "wires": [
+            [
+                "4160b63d297f3998"
+            ]
+        ]
+    },
+    {
+        "id": "4160b63d297f3998",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Rücklauf",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2240,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "79b226cb36ed705f",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_target_return",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_target_return\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 1680,
+        "wires": [
+            [
+                "30d3e83f837433b0"
+            ]
+        ]
+    },
+    {
+        "id": "30d3e83f837433b0",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Rückl-Soll",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2240,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "be39815a90f11c3e",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_hot_gas",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_hot_gas\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1740,
+        "wires": [
+            [
+                "130c8285a18636ae"
+            ]
+        ]
+    },
+    {
+        "id": "130c8285a18636ae",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Heissgas",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2240,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "157d811d22450bd1",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_outside",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_outside\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1800,
+        "wires": [
+            [
+                "8c5b762323b141ae"
+            ]
+        ]
+    },
+    {
+        "id": "8c5b762323b141ae",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "node-red.0.alpha-innotec.Informationen.Temperaturen.Außentemperatur",
+        "topic": "node-red.0.alpha-innotec.Informationen.Temperaturen.Außentemperatur",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2300,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "a1fddd73627fde96",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_outside_avg",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_outside_avg\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 1860,
+        "wires": [
+            [
+                "3890d9e638bb341d"
+            ]
+        ]
+    },
+    {
+        "id": "3890d9e638bb341d",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Mitteltemperatur",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2260,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "69359e6d08c6dfba",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_hot_water",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_hot_water\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 1920,
+        "wires": [
+            [
+                "317ccdebd0970043"
+            ]
+        ]
+    },
+    {
+        "id": "317ccdebd0970043",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Warmwasser-Ist",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2260,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "314dfa30072599fe",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_hot_water_target",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_hot_water_target\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 1980,
+        "wires": [
+            [
+                "82e95c5f5d49383d"
+            ]
+        ]
+    },
+    {
+        "id": "82e95c5f5d49383d",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Warmwasser-Soll",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "false",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2260,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "937a2f5971411dca",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Solarkollektor",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2250,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "eb104952a9f8986f",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_solar_collector",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_solar_collector\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 2040,
+        "wires": [
+            [
+                "937a2f5971411dca"
+            ]
+        ]
+    },
+    {
+        "id": "5de709cd4c3a8d13",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Wärmemenge.Heizung",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2230,
+        "y": 2460,
+        "wires": []
+    },
+    {
+        "id": "d43dcf664ee5ad40",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "thermalenergy_heating",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"thermalenergy_heating\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 2460,
+        "wires": [
+            [
+                "5de709cd4c3a8d13"
+            ]
+        ]
+    },
+    {
+        "id": "a6e349f117771585",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Wärmemenge.Warmwasser",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2250,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "7aab9a4e438ee47d",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "thermalenergy_warmwater",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"thermalenergy_warmwater\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 2520,
+        "wires": [
+            [
+                "a6e349f117771585"
+            ]
+        ]
+    },
+    {
+        "id": "0340889ebe9cdd1c",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Wärmemenge.Gesamt",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2230,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "6c105b15c61b2215",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "thermalenergy_total",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"thermalenergy_total\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 2580,
+        "wires": [
+            [
+                "0340889ebe9cdd1c"
+            ]
+        ]
+    },
+    {
+        "id": "2bd43c0ed59ba394",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "heatpump_duration-Time_WPein_akt",
+        "func": "// Konvertiert Sekunden in Stunden, Minuten und Sekunden\nlet totalSeconds = parseFloat(msg.payload.values[\"Time_WPein_akt\"]);\n\nlet hours = Math.floor(totalSeconds / 3600);  // Stunden berechnen\nlet minutes = Math.floor((totalSeconds % 3600) / 60);  // Minuten berechnen\nlet seconds = Math.floor(totalSeconds % 60);  // Sekunden berechnen\nlet formattedTime =\n    String(hours).padStart(2, '0') + \":\" +\n    String(minutes).padStart(2, '0') + \":\" +\n    String(seconds).padStart(2, '0');\n\n// Setze das formatierte Ergebnis als msg.payload\nmsg.payload = formattedTime;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1910,
+        "y": 780,
+        "wires": [
+            [
+                "d494e0031a6e6c28"
+            ]
+        ]
+    },
+    {
+        "id": "d494e0031a6e6c28",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ablaufzeiten.WP-Seit",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "hh:mm:ss",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2370,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "66051ca1f8116585",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_mixer1_flow",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_mixer1_flow\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 2100,
+        "wires": [
+            [
+                "72422634f9411db3"
+            ]
+        ]
+    },
+    {
+        "id": "72422634f9411db3",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.FB-Mischkreis1-Vorlauf",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2280,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "566326574c85f3b5",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.FB-Mischkreis1-VL-Soll",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2280,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "6a9b2e79574559bc",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_mixer1_target",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_mixer1_target\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 2160,
+        "wires": [
+            [
+                "566326574c85f3b5"
+            ]
+        ]
+    },
+    {
+        "id": "9dfbd934f3ea134e",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "hours_compressor1",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"hours_compressor1\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1200,
+        "wires": [
+            [
+                "fbb9096751e507f6"
+            ]
+        ]
+    },
+    {
+        "id": "fbb9096751e507f6",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Betriebstunden.Betriebstunden-VD1",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "h",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2280,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "924aa0fb6da39b87",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "starts_compressor1",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"starts_compressor1\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1260,
+        "wires": [
+            [
+                "f02fb1f4998ae97e"
+            ]
+        ]
+    },
+    {
+        "id": "f02fb1f4998ae97e",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Betriebstunden.Impulse-Verdichter",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2270,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "66e2306aaa537057",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "hours_heatpump",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"hours_heatpump\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1850,
+        "y": 1320,
+        "wires": [
+            [
+                "58dc73adb549487c"
+            ]
+        ]
+    },
+    {
+        "id": "58dc73adb549487c",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Betriebstunden.Betriebstunden-WP",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "h",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2270,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "e1417308d9125d74",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "hours_heating",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"hours_heating\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 1380,
+        "wires": [
+            [
+                "b82408a447f2bcdb"
+            ]
+        ]
+    },
+    {
+        "id": "b82408a447f2bcdb",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Betriebstunden.Betriebstunden-Heiz",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "h",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2280,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "5e9b9ee990c7865c",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "hours_warmwater",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"hours_warmwater\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1850,
+        "y": 1440,
+        "wires": [
+            [
+                "f0f70995a3dfe4e9"
+            ]
+        ]
+    },
+    {
+        "id": "f0f70995a3dfe4e9",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Betriebstunden.Betriebstunden-WW",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "h",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2280,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "515a6b9078c6f82f",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_extern_return",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_extern_return\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 2280,
+        "wires": [
+            [
+                "0730a07ec867229c"
+            ]
+        ]
+    },
+    {
+        "id": "0730a07ec867229c",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Rückl-Extern",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2250,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "eaba11466c662710",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_compressor1_heating",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_compressor1_heating\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 2220,
+        "wires": [
+            [
+                "a147b0fa83c1c6a4"
+            ]
+        ]
+    },
+    {
+        "id": "a147b0fa83c1c6a4",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.VD-Heizung",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2250,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "022ab595345188e6",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Ansaug-VD",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2240,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "086406b6b91cfd77",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_intake_compressor1",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_intake_compressor1\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 2340,
+        "wires": [
+            [
+                "022ab595345188e6"
+            ]
+        ]
+    },
+    {
+        "id": "debc1bce5a8bfdcb",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "heatingSystemCircPump",
+        "func": "msg.payload = msg.payload.values[\"HUPout\"]\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 840,
+        "wires": [
+            [
+                "b8309e01b4319de0"
+            ]
+        ]
+    },
+    {
+        "id": "997335420dcbc9fb",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Heizungsumwälzpumpe",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2410,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "1d0b0fd120c4e25d",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Warmwasserumwälzpumpe",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2420,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "4ec235bc72a378cd",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Warmwasserumwälzpumpe",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"BUPout\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 900,
+        "wires": [
+            [
+                "9597be95ba4c4d5b"
+            ]
+        ]
+    },
+    {
+        "id": "11eb9698f0fb051b",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.FB-Umwälzpumpe",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2260,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "2c43259b7d8837ea",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "FB-Umwälzpumpe",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"thermalenergy_total\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1850,
+        "y": 960,
+        "wires": [
+            [
+                "11eb9698f0fb051b"
+            ]
+        ]
+    },
+    {
+        "id": "6dbb60ce072c5351",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Kältemittel",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2240,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "6f85cb4bbf4fbe05",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_intake_evaporation",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_intake_evaporation\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 2400,
+        "wires": [
+            [
+                "6dbb60ce072c5351"
+            ]
+        ]
+    },
+    {
+        "id": "cc9c40b693c135a7",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Mischer1_Auf-MA1out",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"MA1out\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1020,
+        "wires": [
+            [
+                "a1d6fed2e9ce7624"
+            ]
+        ]
+    },
+    {
+        "id": "aec40720ac52aa4f",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Mischer1-Auf",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2380,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "e7e5d1f2877a30ca",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Mischer1_Zu-MZ1out",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"MZ1out\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1860,
+        "y": 1080,
+        "wires": [
+            [
+                "328f9d3713f50234"
+            ]
+        ]
+    },
+    {
+        "id": "67ef6c4dcd885877",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Mischer1-Zu",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2380,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "7c4ed3d629bafe23",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Anlagenstatus.Leistung-Ist",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1170,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "8ab85d6940933a21",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Anlagenstatus.Leistung-Ist",
+        "func": "msg.payload = parseFloat(msg.payload.Informationen.Anlagenstatus[\"Leistung Ist\"])\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2200,
+        "wires": [
+            [
+                "7c4ed3d629bafe23"
+            ]
+        ]
+    },
+    {
+        "id": "2b72a8818d101682",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Anlagenstatus.Betriebszustand",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2260,
+        "y": 2780,
+        "wires": []
+    },
+    {
+        "id": "30024a70fa658361",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "heatpump_extendet_state_string",
+        "func": "msg.payload = msg.payload.values[\"heatpump_extendet_state_string\"]\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 2780,
+        "wires": [
+            [
+                "2b72a8818d101682",
+                "d686acf53ec7a0d8"
+            ]
+        ]
+    },
+    {
+        "id": "c3f8560e2fa859ea",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Anlagenstatus.Abtaubedarf",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "%",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2250,
+        "y": 2840,
+        "wires": []
+    },
+    {
+        "id": "8a9d7cea775afabd",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "defrostValve",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"defrostValve\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 2840,
+        "wires": [
+            [
+                "c3f8560e2fa859ea"
+            ]
+        ]
+    },
+    {
+        "id": "57a22fd1f6e57a54",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "4",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2280,
+        "y": 240,
+        "wires": [
+            [
+                "7e38eae7d0f9fb5c"
+            ]
+        ]
+    },
+    {
+        "id": "7e38eae7d0f9fb5c",
+        "type": "luxtronik2 write",
+        "z": "fcd1fad6.c6a83",
+        "name": "LWD-Betriebsart-Heizen",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "parameter": "heating_operation_mode",
+        "x": 2520,
+        "y": 240,
+        "wires": [
+            [
+                "ca6946b75905241b"
+            ]
+        ]
+    },
+    {
+        "id": "292c91ace8137905",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "alpha-innotec.Einstellungen.Heizautomatik",
+        "topic": "alpha-innotec.Einstellungen.Heizautomatik",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 1920,
+        "y": 240,
+        "wires": [
+            [
+                "57a22fd1f6e57a54"
+            ]
+        ]
+    },
+    {
+        "id": "a0394e630bafc985",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "4",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2280,
+        "y": 340,
+        "wires": [
+            [
+                "513a6ba90556e9a6"
+            ]
+        ]
+    },
+    {
+        "id": "513a6ba90556e9a6",
+        "type": "luxtronik2 write",
+        "z": "fcd1fad6.c6a83",
+        "name": "Betriebsart-Warmwasser",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "parameter": "warmwater_operation_mode",
+        "x": 2520,
+        "y": 340,
+        "wires": [
+            [
+                "ca6946b75905241b"
+            ]
+        ]
+    },
+    {
+        "id": "329206188b4c2a44",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "alpha-innotec.Einstellungen.Warmwasserautomatik",
+        "topic": "alpha-innotec.Einstellungen.Warmwasserautomatik",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 1940,
+        "y": 340,
+        "wires": [
+            [
+                "a0394e630bafc985"
+            ]
+        ]
+    },
+    {
+        "id": "38834e66f42b542d",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "alpha-innotec.Einstellungen.Warmwassertemperatur",
+        "topic": "alpha-innotec.Einstellungen.Warmwassertemperatur",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 1960,
+        "y": 140,
+        "wires": [
+            [
+                "0aefa8c6bf3c28b1"
+            ]
+        ]
+    },
+    {
+        "id": "0aefa8c6bf3c28b1",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "warmwater_target_temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "parameter",
+                "pt": "msg",
+                "to": "warmwater_target_temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2410,
+        "y": 140,
+        "wires": [
+            [
+                "a3c0f4e1fa1ba3eb",
+                "bfc15166463027bf"
+            ]
+        ]
+    },
+    {
+        "id": "a3c0f4e1fa1ba3eb",
+        "type": "luxtronik2 write",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "parameter": "warmwater_target_temperature",
+        "x": 2720,
+        "y": 140,
+        "wires": [
+            [
+                "ca6946b75905241b"
+            ]
+        ]
+    },
+    {
+        "id": "ca6946b75905241b",
+        "type": "debug",
+        "z": "fcd1fad6.c6a83",
+        "name": "Ausgabe Test",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2980,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bfc15166463027bf",
+        "type": "luxtronik2 write",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "parameter": "temperature_hot_water_target",
+        "x": 2720,
+        "y": 180,
+        "wires": [
+            [
+                "ca6946b75905241b"
+            ]
+        ]
+    },
+    {
+        "id": "b4249957b7bb595f",
+        "type": "luxtronik2 read",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "x": 1100,
+        "y": 1520,
+        "wires": [
+            [
+                "239813b81175d96c",
+                "6c105b15c61b2215",
+                "7aab9a4e438ee47d",
+                "d43dcf664ee5ad40",
+                "157d811d22450bd1",
+                "a1fddd73627fde96",
+                "69359e6d08c6dfba",
+                "314dfa30072599fe",
+                "6a9b2e79574559bc",
+                "66051ca1f8116585",
+                "eb104952a9f8986f",
+                "a57b6495a5d1fd7e",
+                "9d18d7b1b3d18faa",
+                "79b226cb36ed705f",
+                "eaba11466c662710",
+                "515a6b9078c6f82f",
+                "086406b6b91cfd77",
+                "6f85cb4bbf4fbe05",
+                "be39815a90f11c3e",
+                "66e2306aaa537057",
+                "e1417308d9125d74",
+                "5e9b9ee990c7865c",
+                "924aa0fb6da39b87",
+                "9dfbd934f3ea134e",
+                "30024a70fa658361",
+                "8a9d7cea775afabd",
+                "debc1bce5a8bfdcb",
+                "4ec235bc72a378cd",
+                "9ba17694fef4737b",
+                "cc9c40b693c135a7",
+                "e7e5d1f2877a30ca",
+                "2bd43c0ed59ba394",
+                "aeab8e56fed2a731"
+            ]
+        ]
+    },
+    {
+        "id": "239813b81175d96c",
+        "type": "debug",
+        "z": "fcd1fad6.c6a83",
+        "name": "Ausgabe Test",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1300,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "e9decaac6b1731aa",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "alpha-innotec.Einstellungen.TemperaturOffset",
+        "topic": "alpha-innotec.Einstellungen.TemperaturOffset",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 1940,
+        "y": 420,
+        "wires": [
+            [
+                "ceb3dd4e0a03e016"
+            ]
+        ]
+    },
+    {
+        "id": "ceb3dd4e0a03e016",
+        "type": "luxtronik2 write",
+        "z": "fcd1fad6.c6a83",
+        "name": "Betriebsart-Warmwasser",
+        "host": "192.168.131.119",
+        "port": "8889",
+        "parameter": "heating_target_temperature",
+        "x": 2510,
+        "y": 420,
+        "wires": [
+            [
+                "ca6946b75905241b"
+            ]
+        ]
+    },
+    {
+        "id": "d686acf53ec7a0d8",
+        "type": "debug",
+        "z": "fcd1fad6.c6a83",
+        "name": "Ausgabe Test",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2140,
+        "y": 3040,
+        "wires": []
+    },
+    {
+        "id": "b8309e01b4319de0",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "Aus",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "Ein",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2080,
+        "y": 840,
+        "wires": [
+            [
+                "997335420dcbc9fb"
+            ]
+        ]
+    },
+    {
+        "id": "9597be95ba4c4d5b",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "Aus",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "Ein",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2080,
+        "y": 900,
+        "wires": [
+            [
+                "1d0b0fd120c4e25d"
+            ]
+        ]
+    },
+    {
+        "id": "9ba17694fef4737b",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "EVUin",
+        "func": "msg.payload = msg.payload.values[\"EVUin\"]\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1830,
+        "y": 540,
+        "wires": [
+            [
+                "32ce5066977e9049"
+            ]
+        ]
+    },
+    {
+        "id": "0fa18a2386f87753",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Anlagenstatus.EVU",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2380,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "32ce5066977e9049",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "Aus",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "Ein",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2100,
+        "y": 540,
+        "wires": [
+            [
+                "0fa18a2386f87753"
+            ]
+        ]
+    },
+    {
+        "id": "a1d6fed2e9ce7624",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "Aus",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "Ein",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2060,
+        "y": 1020,
+        "wires": [
+            [
+                "aec40720ac52aa4f"
+            ]
+        ]
+    },
+    {
+        "id": "328f9d3713f50234",
+        "type": "change",
+        "z": "fcd1fad6.c6a83",
+        "name": "Converter",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "Aus",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "Ein",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2059.3779296875,
+        "y": 1080.77294921875,
+        "wires": [
+            [
+                "67ef6c4dcd885877"
+            ]
+        ]
+    },
+    {
+        "id": "a35754bb38c52037",
+        "type": "Luxtronik2",
+        "z": "fcd1fad6.c6a83",
+        "host": "192.168.131.119",
+        "port": 8214,
+        "password": "",
+        "x": 530,
+        "y": 2060,
+        "wires": [
+            [
+                "8ab85d6940933a21",
+                "594624b3c5b8a248",
+                "b37b14df56e7b51f",
+                "38f7fa9cf6da2f79",
+                "b18d320d1071a750"
+            ]
+        ]
+    },
+    {
+        "id": "594624b3c5b8a248",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Wärme.Zus-Wärmeerz",
+        "func": "msg.payload = parseFloat(msg.payload.Informationen.Wärmemenge[\"Zus. Wärmeerz\"])\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 2140,
+        "wires": [
+            [
+                "7fb94f55e63c5fdb"
+            ]
+        ]
+    },
+    {
+        "id": "7fb94f55e63c5fdb",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Wärmemenge.Zus-Wärmeerz",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1180,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "b37b14df56e7b51f",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Freq. aktuell",
+        "func": "msg.payload = parseFloat(msg.payload.Informationen[\"Ausgänge\"][\"Freq. aktuell\"])\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 2080,
+        "wires": [
+            [
+                "9dde5a091a97abc8"
+            ]
+        ]
+    },
+    {
+        "id": "9dde5a091a97abc8",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Freq-aktuell",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "rpm",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1150,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "b18d320d1071a750",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "Verdichter",
+        "func": "msg.payload = (msg.payload.Informationen[\"Ausgänge\"].Verdichter)\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 1980,
+        "wires": [
+            [
+                "412287256e730d05"
+            ]
+        ]
+    },
+    {
+        "id": "412287256e730d05",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.Verdichter",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1150,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "38f7fa9cf6da2f79",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "VD-Heizung",
+        "func": "msg.payload = (msg.payload.Informationen[\"Ausgänge\"][\"VD-Heizung\"])\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 2020,
+        "wires": [
+            [
+                "de39eeeb2f823ac8"
+            ]
+        ]
+    },
+    {
+        "id": "de39eeeb2f823ac8",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Ausgänge.VD-Heizung",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "string",
+        "readonly": "true",
+        "stateUnit": "",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1150,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "49afeadb47ca4cb7",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.CommonPower.WPCurrentPowerShelly3M",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "false",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1170,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "ce1c1f978cf9cb01",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "Total Instantaneous power",
+        "topic": "shelly.0.SHEM-3#485519D78A27#1.Total.InstantPower",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 800,
+        "y": 1860,
+        "wires": [
+            [
+                "49afeadb47ca4cb7"
+            ]
+        ]
+    },
+    {
+        "id": "5336728121a0bee9",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.CommonPower.HeizstabCurrentPower",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "false",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1160,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "1af1ef89f4a7625e",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "Heizstab-Power",
+        "topic": "shelly.1.shellypmmini#348518e098ac#1.PM1:0.Power",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 760,
+        "y": 1920,
+        "wires": [
+            [
+                "5336728121a0bee9"
+            ]
+        ]
+    },
+    {
+        "id": "de228a8683666a5b",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "Home PV Power total",
+        "topic": "plenticore.0.devices.local.Home_P",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 780,
+        "y": 1800,
+        "wires": [
+            [
+                "a37fef9197a8936c"
+            ]
+        ]
+    },
+    {
+        "id": "a37fef9197a8936c",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.CommonPower.PVTotalCurrentPower",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "false",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1160,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "b9c4ee6656d1f361",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "",
+        "topic": "alpha-innotec.Informationen.Temperaturen.Verdichtertemperatur",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "true",
+        "stateUnit": "°C",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 2290,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "aeab8e56fed2a731",
+        "type": "function",
+        "z": "fcd1fad6.c6a83",
+        "name": "temperature_compressor1_heating",
+        "func": "msg.payload = parseFloat(msg.payload.values[\"temperature_compressor1_heating\"])\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 2640,
+        "wires": [
+            [
+                "b9c4ee6656d1f361"
+            ]
+        ]
+    },
+    {
+        "id": "45454342ef64b1b8",
+        "type": "ioBroker get",
+        "z": "fcd1fad6.c6a83",
+        "name": "BYD Current SOC",
+        "topic": "plenticore.0.devices.local.battery.SoC",
+        "attrname": "payload",
+        "payloadType": "value",
+        "errOnInvalidState": "nothing",
+        "x": 770,
+        "y": 1740,
+        "wires": [
+            [
+                "3736dcb05dedb9b0"
+            ]
+        ]
+    },
+    {
+        "id": "3736dcb05dedb9b0",
+        "type": "ioBroker out",
+        "z": "fcd1fad6.c6a83",
+        "name": "BYDCurrentSOC",
+        "topic": "node-red.0.alpha-innotec.CommonPower.BYDCurrentSOC",
+        "ack": "true",
+        "autoCreate": "true",
+        "stateName": "",
+        "role": "",
+        "payloadType": "",
+        "readonly": "false",
+        "stateUnit": "kWh",
+        "stateMin": "",
+        "stateMax": "",
+        "x": 1050,
+        "y": 1740,
+        "wires": []
+    }
+]
