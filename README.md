@@ -5,7 +5,12 @@ This Project is running on IOBROKER and needs some prereqs to be installed first
 
 1. NodeRed, java script needs to be installed in iobroker
 2. coolships node-red-contrib-luxtronik2 needs to be deployed as well as node-red-contrib-luxtronik2-ws (not more supported, will try to demise it)
-3. Plenticore needs to be installed in IOBROKER
+3. Plenticore needs to be installed in IOBROKER help available below
+
    https://www.iobroker.net/#en/adapters/adapterref/iobroker.plenticore/README.md
+
+# what does the java script do
+
+....
 
    
