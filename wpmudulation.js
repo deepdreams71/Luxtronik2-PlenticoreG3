@@ -1,51 +1,59 @@
-// Version 0.1
-// Author deepdreams
-// initial 20241007
+/**
+ * Script Name: PVOverload Management
+ * Version: 1.0.0
+ * Description: This script manages the PVOverload based on conditions related to 
+ * solar power and heating automation settings. It ensures that PVOverload is activated 
+ * only when certain conditions are met and within specified limits.
+ * 
+ * Last Updated: 2024-10-07
+ * Author: deepdreams71
+ */
 
 schedule("*/10 * * * *", function () {
     
-    let scriptName = name; // Lese den Skriptnamen aus
+    let scriptName = name; // Read the script name
     let sunrise = getState("plenticore.0.forecast.day1.sun.sunrise").val;
-    let sunset = getState("plenticore.0.forecast.day1.sun.sunset").val;
+    let sunset = getState("plenticore.0.alpha-innotec.Einstellungen.sunset").val;
     let ModulationsautomatikDebug = getState("node-red.0.alpha-innotec.Einstellungen.ModulationsautomatikDebug").val;
-    let heizautomatik = getState("node-red.0.alpha-innotec.Einstellungen.Heizautomatik").val; // Heizautomatik einlesen
-    
-    // Debug-Funktion mit Debugging-Flag
+    let heizautomatik = getState("node-red.0.alpha-innotec.Einstellungen.Heizautomatik").val; // Read Heating Automation
+
+    // Maximal number of PVOverload activations per day
+    let maxOverloadRuns = getState("node-red.0.alpha-innotec.Einstellungen.MaxOverloadRuns").val;
+
+    // Debug function with debug flag
     function debug(message) {
         if (ModulationsautomatikDebug) {
             console.log(`DEBUG (${scriptName}): ${message}`);
         }
     }
-    
-    // Prüfe, ob Heizautomatik aktiviert ist
-    if (!heizautomatik) {
-        debug("Heizautomatik ist deaktiviert, Skript wird nicht ausgeführt.");
-        setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", false);
-        setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 0);
 
-        return; // Beende das Skript, wenn Heizautomatik nicht aktiviert ist
+    // Check if heating automation is enabled
+    if (!heizautomatik) {
+        debug("Heating automation is disabled, script will not run.");
+        return; // Exit the script if heating automation is not enabled
     }
 
-    // Konvertiere Sonnenaufgang und Sonnenuntergang in Zeitform
+    // Convert sunrise and sunset into time format
     let sunriseTime = new Date(sunrise).getTime();
     let sunsetTime = new Date(sunset).getTime();
     let now = new Date().getTime();
 
-    // Prüfe, ob die aktuelle Zeit nach Sonnenaufgang + 1 Stunde und vor Sonnenuntergang - 1 Stunde liegt
+    // Check if the current time is after sunrise + 1 hour and before sunset - 1 hour
     if (now > (sunriseTime + 3600000) && now < (sunsetTime - 3600000)) {
-        debug(`Zeit zwischen Sonnenaufgang (${sunrise}) und Sonnenuntergang (${sunset})`);
+        debug(`Time between sunrise (${sunrise}) and sunset (${sunset})`);
         
-        // Prüfe den Zustand von ModulationsAutomatik
+        // Check the state of ModulationsAutomatik
         if (getState("node-red.0.alpha-innotec.Einstellungen.ModulationsAutomatik").val === true) {
-            debug(`PVModulation eingeschaltet`);
+            debug(`PV modulation is enabled.`);
             
             let pvOverloadMinTime = getState("node-red.0.alpha-innotec.Einstellungen.PVOverloadMinTime").val;
-            let modulationRuntime = getState("node-red.0.alpha-innotec.Einstellungen.ModulationRuntime").val; // Laufzeit in Minuten
+            let modulationRuntime = getState("node-red.0.alpha-innotec.Einstellungen.ModulationRuntime").val; // Runtime in minutes
             
-            let minutesConditionTrue = 0; // Zähler für Minuten, in denen die Bedingungen erfüllt sind
-            let maxCheckTime = pvOverloadMinTime * 60000; // Zeit, die Bedingungen erfüllt sein müssen (in Millisekunden)
+            let minutesConditionTrue = 0; // Counter for minutes where conditions are met
+            let currentOverloadRuns = 0; // Counter for current PVOverload activations
+            let maxCheckTime = pvOverloadMinTime * 60000; // Time conditions must be met (in milliseconds)
 
-            // Funktion, die die Bedingungsprüfung und die Erweiterung der Laufzeit steuert
+            // Function that checks conditions and controls runtime extension
             function checkConditionsAndExtendRuntime() {
                 let intervalCheck = setInterval(function() {
                     let bydCurrentSOC = getState("node-red.0.alpha-innotec.CommonPower.BYDCurrentSOC").val;
@@ -53,67 +61,65 @@ schedule("*/10 * * * *", function () {
                     let pvTotalCurrentPower = getState("node-red.0.alpha-innotec.CommonPower.PVTotalCurrentPower").val;
                     let wpCurrentPower = getState("node-red.0.alpha-innotec.CommonPower.WPCurrentPowerShelly3M").val;
 
-                    // Debug mit Variablenwerten
-                    debug(`Bedingungen prüfen: BYDCurrentSOC (${bydCurrentSOC}) >= BYDModulationStartSOC (${bydModulationStartSOC}) und PVTotalCurrentPower (${pvTotalCurrentPower}) > WPCurrentPowerShelly3M (${wpCurrentPower})`);
+                    // Debug with variable values
+                    debug(`Checking conditions: BYDCurrentSOC (${bydCurrentSOC}) >= BYDModulationStartSOC (${bydModulationStartSOC}) and PVTotalCurrentPower (${pvTotalCurrentPower}) > WPCurrentPowerShelly3M (${wpCurrentPower})`);
 
-                    // Prüfe, ob BYDCurrentSOC >= BYDModulationStartSOC und PVTotalCurrentPower > WPCurrentPowerShelly3M
+                    // Check if BYDCurrentSOC >= BYDModulationStartSOC and PVTotalCurrentPower > WPCurrentPowerShelly3M
                     if (bydCurrentSOC >= bydModulationStartSOC && pvTotalCurrentPower > wpCurrentPower) {
-                        minutesConditionTrue++; // Erhöhe den Zähler, wenn die Bedingungen erfüllt sind
-                        debug(`Bedingungen erfüllt für ${minutesConditionTrue} Minute(n).`);
+                        minutesConditionTrue++; // Increase the counter if conditions are met
+                        debug(`Conditions met for ${minutesConditionTrue} minute(s).`);
 
-                        // Wenn die Bedingungen für PVOverloadMinTime Minuten erfüllt sind, aktiviere PVOverload
-                        if (minutesConditionTrue >= pvOverloadMinTime) {
-                            debug(`Bedingungen für mindestens ${pvOverloadMinTime} Minuten erfüllt, PVOverload wird aktiviert.`);
+                        // If conditions are met for PVOverloadMinTime minutes and maxOverloadRuns is not exceeded
+                        if (minutesConditionTrue >= pvOverloadMinTime && currentOverloadRuns < maxOverloadRuns) {
+                            debug(`Conditions met for at least ${pvOverloadMinTime} minutes, activating PVOverload.`);
                             setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", true);
                             setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 5);
-                            debug(`PVOverload aktiviert, TemperaturOffset auf 5 gesetzt`);
+                            debug(`PVOverload activated, Temperature Offset set to 5.`);
+                            currentOverloadRuns++; // Increase the activation counter
+                            debug(`Current number of PVOverload activations: ${currentOverloadRuns}`);
 
-                            // Setze einen Timer für die ModulationRuntime
+                            // Set a timer for the modulation runtime
                             setTimeout(function () {
-                                // Nach Ablauf der ModulationRuntime prüfe weiter, ob die Bedingungen noch gültig sind
+                                // After the modulation runtime, continue checking if conditions are still valid
                                 let stopCheckInterval = setInterval(function() {
                                     let bydModulationStopSOC = getState("node-red.0.alpha-innotec.Einstellungen.BYDModulationStopSOC").val;
                                     pvTotalCurrentPower = getState("node-red.0.alpha-innotec.CommonPower.PVTotalCurrentPower").val;
                                     wpCurrentPower = getState("node-red.0.alpha-innotec.CommonPower.WPCurrentPowerShelly3M").val;
                                     bydCurrentSOC = getState("node-red.0.alpha-innotec.CommonPower.BYDCurrentSOC").val;
 
-                                    // Debug mit Variablenwerten
-                                    debug(`Überprüfe weiter: BYDCurrentSOC (${bydCurrentSOC}) <= BYDModulationStopSOC (${bydModulationStopSOC}) oder PVTotalCurrentPower (${pvTotalCurrentPower}) <= WPCurrentPowerShelly3M (${wpCurrentPower})`);
+                                    // Debug with variable values
+                                    debug(`Continue checking: BYDCurrentSOC (${bydCurrentSOC}) <= BYDModulationStopSOC (${bydModulationStopSOC}) or PVTotalCurrentPower (${pvTotalCurrentPower}) <= WPCurrentPowerShelly3M (${wpCurrentPower})`);
 
-                                    // Prüfe, ob die Bedingungen zum Stoppen erfüllt sind
+                                    // Check if conditions to stop are met
                                     if (pvTotalCurrentPower <= wpCurrentPower || bydCurrentSOC <= bydModulationStopSOC) {
-                                        // Deaktiviere PVOverload und setze TemperaturOffset zurück
+                                        // Disable PVOverload and reset temperature offset
                                         setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", false);
                                         setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 0);
-                                        debug(`PVOverload deaktiviert, TemperaturOffset zurückgesetzt`);
+                                        debug(`PVOverload disabled, Temperature Offset reset.`);
 
-                                        // Beende den Überwachungsprozess
+                                        // End the monitoring process
                                         clearInterval(stopCheckInterval);
                                     }
-                                }, modulationRuntime * 60000); // Jede ModulationRuntime-Minuten prüfen
-                            }, modulationRuntime * 60000); // ModulationRuntime läuft, bevor erneut geprüft wird
+                                }, modulationRuntime * 60000); // Check every modulationRuntime minutes
+                            }, modulationRuntime * 60000); // ModulationRuntime runs before checking again
 
-                            // Beende den Intervall-Check, da die Bedingungen erfüllt wurden
+                            // End the interval check as conditions have been met
                             clearInterval(intervalCheck);
                         }
                     } else {
-                        // Setze den Zähler zurück, wenn die Bedingungen nicht erfüllt sind
-                        debug(`Bedingungen nicht erfüllt, Zähler wird zurückgesetzt.`);
+                        // Reset the counter if conditions are not met
+                        debug(`Conditions not met, counter will be reset.`);
                         minutesConditionTrue = 0;
                     }
-                }, 60000); // Überprüfe jede Minute für PVOverloadMinTime Minuten
+                }, 60000); // Check every minute for PVOverloadMinTime minutes
             }
 
-            // Starte die erste Bedingungsprüfung
+            // Start the first condition check
             checkConditionsAndExtendRuntime();
         } else {
-            setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", false);
-            setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 0);
-            debug("Modulationsautomatik ist deaktiviert");
+           debug("Modulation automation is disabled.");
         }
     } else {
-        setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", false);
-        setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 0);
-        debug("Zeit vor Sonnenaufgang oder nach Sonnenuntergang");
+       debug("Time before sunrise or after sunset.");
     }
 });
