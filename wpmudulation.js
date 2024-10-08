@@ -13,7 +13,7 @@ schedule("*/10 * * * *", function () {
 
     let scriptName = name; // Read the script name
     let sunrise = getState("plenticore.0.forecast.day1.sun.sunrise").val;
-    let sunset = getState("plenticore.0.alpha-innotec.Einstellungen.sunset").val;
+    let sunset = getState("plenticore.0.forecast.day1.sun.sunset").val;
     let ModulationsautomatikDebug = getState("node-red.0.alpha-innotec.Einstellungen.ModulationsautomatikDebug").val;
     let heizautomatik = getState("node-red.0.alpha-innotec.Einstellungen.Heizautomatik").val; // Read Heating Automation
 
