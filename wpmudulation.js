@@ -1,16 +1,16 @@
 /**
  * Script Name: PVOverload Management
- * Version: 1.0.0
+ * Version: 1.0.1
  * Description: This script manages the PVOverload based on conditions related to 
  * solar power and heating automation settings. It ensures that PVOverload is activated 
  * only when certain conditions are met and within specified limits.
  * 
- * Last Updated: 2024-10-07
+ * Last Updated: 2024-10-08
  * Author: deepdreams71
  */
 
 schedule("*/10 * * * *", function () {
-    
+
     let scriptName = name; // Read the script name
     let sunrise = getState("plenticore.0.forecast.day1.sun.sunrise").val;
     let sunset = getState("plenticore.0.alpha-innotec.Einstellungen.sunset").val;
@@ -48,6 +48,7 @@ schedule("*/10 * * * *", function () {
             
             let pvOverloadMinTime = getState("node-red.0.alpha-innotec.Einstellungen.PVOverloadMinTime").val;
             let modulationRuntime = getState("node-red.0.alpha-innotec.Einstellungen.ModulationRuntime").val; // Runtime in minutes
+            let pvOverflowThreshold = getState("node-red.0.alpha-innotec.Einstellungen.PVOverflow").val; // PVOverflow threshold
             
             let minutesConditionTrue = 0; // Counter for minutes where conditions are met
             let currentOverloadRuns = 0; // Counter for current PVOverload activations
@@ -62,10 +63,10 @@ schedule("*/10 * * * *", function () {
                     let wpCurrentPower = getState("node-red.0.alpha-innotec.CommonPower.WPCurrentPowerShelly3M").val;
 
                     // Debug with variable values
-                    debug(`Checking conditions: BYDCurrentSOC (${bydCurrentSOC}) >= BYDModulationStartSOC (${bydModulationStartSOC}) and PVTotalCurrentPower (${pvTotalCurrentPower}) > WPCurrentPowerShelly3M (${wpCurrentPower})`);
+                    debug(`Checking conditions: BYDCurrentSOC (${bydCurrentSOC}) >= BYDModulationStartSOC (${bydModulationStartSOC}) and PVTotalCurrentPower (${pvTotalCurrentPower}) > WPCurrentPowerShelly3M (${wpCurrentPower}) and PVTotalCurrentPower > PVOverflow (${pvOverflowThreshold})`);
 
-                    // Check if BYDCurrentSOC >= BYDModulationStartSOC and PVTotalCurrentPower > WPCurrentPowerShelly3M
-                    if (bydCurrentSOC >= bydModulationStartSOC && pvTotalCurrentPower > wpCurrentPower) {
+                    // Check if BYDCurrentSOC >= BYDModulationStartSOC, PVTotalCurrentPower > WPCurrentPowerShelly3M, and PVTotalCurrentPower > PVOverflow
+                    if (bydCurrentSOC >= bydModulationStartSOC && pvTotalCurrentPower > wpCurrentPower && pvTotalCurrentPower > pvOverflowThreshold) {
                         minutesConditionTrue++; // Increase the counter if conditions are met
                         debug(`Conditions met for ${minutesConditionTrue} minute(s).`);
 
@@ -88,10 +89,10 @@ schedule("*/10 * * * *", function () {
                                     bydCurrentSOC = getState("node-red.0.alpha-innotec.CommonPower.BYDCurrentSOC").val;
 
                                     // Debug with variable values
-                                    debug(`Continue checking: BYDCurrentSOC (${bydCurrentSOC}) <= BYDModulationStopSOC (${bydModulationStopSOC}) or PVTotalCurrentPower (${pvTotalCurrentPower}) <= WPCurrentPowerShelly3M (${wpCurrentPower})`);
+                                    debug(`Continue checking: BYDCurrentSOC (${bydCurrentSOC}) <= BYDModulationStopSOC (${bydModulationStopSOC}) or PVTotalCurrentPower (${pvTotalCurrentPower}) <= WPCurrentPowerShelly3M (${wpCurrentPower}) or PVTotalCurrentPower <= PVOverflow (${pvOverflowThreshold})`);
 
                                     // Check if conditions to stop are met
-                                    if (pvTotalCurrentPower <= wpCurrentPower || bydCurrentSOC <= bydModulationStopSOC) {
+                                    if (pvTotalCurrentPower <= wpCurrentPower || bydCurrentSOC <= bydModulationStopSOC || pvTotalCurrentPower <= pvOverflowThreshold) {
                                         // Disable PVOverload and reset temperature offset
                                         setState("node-red.0.alpha-innotec.Einstellungen.PVOverload", false);
                                         setState("node-red.0.alpha-innotec.Einstellungen.TemperaturOffset", 0);
